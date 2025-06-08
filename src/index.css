@@ -1,0 +1,399 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #111827;
+  color: white;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
+
+.loadingAnimation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  background: transparent;
+}
+.loadingAnimation > label {
+  color: #444;
+}
+.loadingAnimation .loadTrack {
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  width: 300px;
+  height: 5px;
+  border-radius: 20px;
+  background: #333;
+  box-shadow: inset 2px 1px 1px #000;
+  animation: loadedTrackWidthTransform 1s 3s forwards;
+}
+.loadingAnimation .loaded {
+  background: #e74c3c;
+  position: absolute;
+  height: calc(100% - 2px);
+  top: 1px;
+  left: 1px;
+  border-radius: 20px;
+  animation: loadingColor 3s forwards, loadingFill 3s forwards;
+}
+.loadingAnimation .loaded label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 0;
+  animation: loadedLabelTransform 1.5s 3s forwards;
+}
+.loadingAnimation .mascot {
+  width: 200px;
+  height: 200px;
+  right: 0px;
+  left: auto;
+  position: absolute;
+  bottom: 100%;
+  overflow: hidden;
+}
+.mascot .body {
+  width: 80px;
+  height: 100px;
+  position: absolute;
+  background: #333;
+  bottom: -100%;
+  transform: rotate(-100deg);
+  right: 30px;
+  border-radius: 100px 100px 0 0;
+  animation: mascotBody 1s 4s forwards;
+  transform-origin: bottom center;
+}
+.mascot .body .innerBody {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  border-radius: 100px 100px 0 0;
+}
+.mascot .body .innerBody::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 40%;
+  width: 80%;
+  height: 120%;
+  background: linear-gradient(90deg, #353535, #444);
+  transform-origin: top left;
+  transform: rotate(-10deg);
+}
+.mascot .body .hat {
+  background: #2a754a;
+  position: absolute;
+  width: calc(100% + 5px);
+  height: 40px;
+  border-radius: 100px 100px 5px 5px;
+  perspective: 1000px;
+  top: 0px;
+  left: -2px;
+  transform: rotate(-10deg);
+  transform-origin: center center;
+  animation: mascotHat 1s 4.5s forwards;
+  animation-timing-function: ease-in-out;
+}
+.mascot .body .hat::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 50px;
+  background: #1d5133;
+  border-radius: 50px 50px 0 0;
+  transform-origin: left top;
+  transform: rotateX(60deg) rotateZ(-120deg);
+  z-index: -1;
+  left: -17px;
+  top: 54px;
+}
+.mascot .body .eyes {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  transform: rotate(5deg);
+  animation: mascotEyes 0.8s alternate infinite;
+}
+.mascot .body .eyes span {
+  display: inline-block;
+  width: 20%;
+  height: 15px;
+  border-top: 3px solid #111;
+  border-radius: 100%;
+  margin: 2%;
+}
+.mascot .body .mouth {
+  position: absolute;
+  width: 50%;
+  height: 10px;
+  border-bottom: 2px solid #111;
+  top: 65%;
+  left: 20%;
+  animation: mascotMouth 1s 6s forwards;
+  transform-origin: right top;
+  border-radius: 100%;
+}
+
+/* Work section styles */
+.work {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.work img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: block;
+  transition: transform 0.5s;
+}
+
+.layer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(rgba(0,0,0,0.6), #3b82f6);
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 40px;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.work:hover img {
+  transform: scale(1.1);
+}
+
+.work:hover .layer {
+  opacity: 1;
+}
+
+.layer h3 {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.layer a {
+  margin-top: 20px;
+  text-decoration: none;
+  color: #3b82f6;
+  background: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.layer a:hover {
+  transform: translateY(-5px);
+}
+
+/* Work section styles */
+.work-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 40px;
+  margin-top: 50px;
+}
+
+.work, .work-hidden {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.work-hidden {
+  display: none;
+}
+
+.work img, .work-hidden img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+  transition: transform 0.5s;
+}
+
+.layer {
+  width: 100%;
+  height: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), #ff004f);
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  font-size: 14px;
+  transition: height 0.5s;
+}
+
+.layer h3 {
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.layer a {
+  margin-top: 20px;
+  color: #ff004f;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 60px;
+  background: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.work:hover img,
+.work-hidden:hover img {
+  transform: scale(1.1);
+}
+
+.work:hover .layer,
+.work-hidden:hover .layer {
+  height: 100%;
+}
+
+.btn {
+  display: block;
+  margin: 50px auto;
+  width: fit-content;
+  border: 1px solid #ff004f;
+  padding: 14px 50px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #fff;
+  transition: background 0.5s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #ff004f;
+}
+
+.btn1 {
+  display: none;
+}
+
+/* animations */
+@keyframes loadingFill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes loadingColor {
+  0% {
+    background: #e74c3c;
+  }
+  100% {
+    background: #27ae60;
+    border-radius: 5px;
+  }
+}
+@keyframes loadedLabelTransform {
+  0% {
+    font-size: 11px;
+    color: transparent;
+  }
+  80% {
+    margin: 0;
+    color: transparent;
+  }
+  100% {
+    margin-top: 20px;
+    font-size: 11px;
+    color: #2ecc71;
+  }
+}
+@keyframes mascotBody {
+  100% {
+    transform: none;
+    bottom: -2px;
+    right: 20px;
+  }
+}
+@keyframes mascotMouth {
+  100% {
+    top: 60%;
+    left: 25%;
+    transform: rotate(-10deg);
+  }
+}
+@keyframes mascotEyes {
+  0% {
+    top: 40%;
+  }
+  100% {
+    top: 44%;
+  }
+}
+@keyframes mascotHat {
+  50% {
+    transform: rotate(10deg);
+    top: -5px;
+    left: -2px;
+  }
+  100% {
+    transform: rotate(0deg);
+    top: -5px;
+    left: -2px;
+  }
+}

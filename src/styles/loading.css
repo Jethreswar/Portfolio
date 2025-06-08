@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300");
+
+:root {
+  --animation-duration: 1s;
+  --main-color: #ff8b94;
+  --background-color: #1a1a1a;
+  --ball-animation: halfJump ease-in-out;
+  --rect-animation: rotationClockwise ease-in-out;
+  --font: 'Roboto', sans-serif;
+  --delay: 0s;
+}
+
+.loadingContainer {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+.animation {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 200px;
+  width: 200px;
+  top: 40%;
+  transform: scale(1);
+}
+
+.containerRect {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+}
+
+.ball {
+  width: 48px;
+  height: 48px;
+  border-radius: 30px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  background-color: var(--main-color);
+  bottom: 49px;
+}
+
+.rect {
+  background-color: var(--main-color);
+  width: 80.5px;
+  height: 50px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 3px;
+}
+
+.animationBall {
+  animation: var(--ball-animation) var(--animation-duration) infinite;
+  animation-iteration-count: 6;
+}
+
+.animationRect {
+  animation: var(--rect-animation) var(--animation-duration) infinite;
+  animation-iteration-count: 6;
+}
+
+/* Rectangle animations */
+@keyframes rotationClockwise {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(90deg); }
+  100% { transform: rotate(180deg); }
+}
+
+/* Ball animations */
+@keyframes halfJump {
+  0% { bottom: 49px; }
+  30% { bottom: 77px; }
+  50% { bottom: 64px; }
+  60% { bottom: 73px; }
+  100% { bottom: 49px; }
+}
