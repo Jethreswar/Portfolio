@@ -130,19 +130,19 @@ function App() {
       title: "Financial Data Analysis System",
       description:
         "Built a real-time financial data analysis platform using React, TypeScript, and AWS",
-      image: "/public/work-1.png",
+      image: "/work-1.png",
     },
     {
       title: "Healthcare Management Portal",
       description:
         "Developed a healthcare management system with patient data visualization using React and Node.js",
-      image: "/public/work-2.png",
+      image: "/work-2.png",
     },
     {
       title: "E-Commerce Recommendation Engine",
       description:
         "Created an AI-powered product recommendation engine for an e-commerce platform",
-      image: "/public/work-3.png",
+      image: "/work-3.png",
     },
   ];
 
@@ -162,32 +162,32 @@ function App() {
       title: "Senior Software Engineer",
       description:
         "Led full-stack development of enterprise applications using React, TypeScript, and AWS services",
-      image: "/public/work-1.png",
+      image: "/work-1.png",
     },
     {
       title: "Software Developer",
       description:
         "Developed scalable microservices and RESTful APIs using Node.js and Express, improved system performance by 40%",
-      image: "/public/work-2.png",
+      image: "/work-2.png",
     },
     {
       title: "Full Stack Developer",
       description:
         "Built responsive web interfaces and backend systems with React, Node.js, and MongoDB",
-      image: "/public/work-3.png",
+      image: "/work-3.png",
     },
     {
       title: "Frontend Developer",
       description:
         "Created dynamic user interfaces with React and Redux, implemented responsive designs with Tailwind CSS",
-      image: "/public/user.png",
+      image: "/user.png",
       hidden: true,
     },
     {
       title: "Backend Engineer",
       description:
         "Designed and implemented RESTful APIs, serverless functions, and database systems for high-traffic applications",
-      image: "/public/background.png",
+      image: "/background.png",
       hidden: true,
     },
   ];
@@ -257,7 +257,7 @@ function App() {
             transition={{ delay: 0.6 }}
           >
             <img
-              src="/public/user.png"
+              src="/user.png"
               alt="Jethreshwar Varada"
               className="w-48 h-48 rounded-full border-4 border-blue-500 object-cover"
             />
@@ -326,7 +326,7 @@ function App() {
                 transition={{ delay: 1.2 }}
               >
                 <a
-                  href="/public/my-cv.pdf"
+                  href="/my-cv.pdf"
                   download
                   className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition-colors inline-flex items-center"
                 >
@@ -357,7 +357,7 @@ function App() {
               transition={{ delay: 0.2 }}
             >
               <img
-                src="/public/background.png"
+                src="/background.png"
                 alt="About Jethreshwar"
                 className="rounded-lg shadow-xl max-w-full h-auto"
               />
