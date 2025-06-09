@@ -13,13 +13,14 @@ import "./styles/loading.css";
 
 function LoadingScreen() {
   return (
-    <div className="fixed inset-0 bg-black z-50">
+    <div className="fixed inset-0 bg-gray-900 z-50">
       <div className="loadingContainer">
         <div className="animation">
           <div className="ball animationBall"></div>
           <div className="containerRect">
             <div className="rect animationRect"></div>
           </div>
+          <div className="loading-text">Loading Portfolio</div>
         </div>
       </div>
     </div>
@@ -121,7 +122,7 @@ function App() {
   const [showAllWork, setShowAllWork] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2200);
+    const timer = setTimeout(() => setIsLoading(false), 2500);
     return () => clearTimeout(timer);
   }, []);
 
