@@ -127,65 +127,67 @@ function App() {
 
   const projects = [
     {
-      title: "E-Commerce Platform",
-      description: "A full-stack e-commerce solution with React and Node.js",
-      image:
-        "https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      title: "Financial Data Analysis System",
+      description:
+        "Built a real-time financial data analysis platform using React, TypeScript, and AWS",
+      image: "/public/work-1.png",
     },
     {
-      title: "Social Media Dashboard",
-      description: "Analytics dashboard for social media management",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      title: "Healthcare Management Portal",
+      description:
+        "Developed a healthcare management system with patient data visualization using React and Node.js",
+      image: "/public/work-2.png",
     },
     {
-      title: "AI Image Generator",
-      description: "Web application that generates images using AI",
-      image:
-        "https://images.unsplash.com/photo-1547954575-855750c57bd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      title: "E-Commerce Recommendation Engine",
+      description:
+        "Created an AI-powered product recommendation engine for an e-commerce platform",
+      image: "/public/work-3.png",
     },
   ];
 
   const skills = [
-    { name: "React", level: 90 },
-    { name: "Node.js", level: 85 },
-    { name: "TypeScript", level: 88 },
-    { name: "Python", level: 82 },
-    { name: "GraphQL", level: 75 },
-    { name: "Docker", level: 80 },
+    { name: "React/React Native", level: 95 },
+    { name: "TypeScript/JavaScript", level: 92 },
+    { name: "Node.js/Express", level: 90 },
+    { name: "Python", level: 88 },
+    { name: "AWS/Cloud Services", level: 85 },
+    { name: "CI/CD & DevOps", level: 82 },
+    { name: "SQL/NoSQL Databases", level: 90 },
+    { name: "System Design", level: 85 },
   ];
 
   const workItems = [
     {
-      title: "Web Development",
+      title: "Senior Software Engineer",
       description:
-        "Creating web applications for users with HTML, CSS, and JavaScript",
+        "Led full-stack development of enterprise applications using React, TypeScript, and AWS services",
       image: "/public/work-1.png",
     },
     {
-      title: "Data Mining",
+      title: "Software Developer",
       description:
-        "Creating machine learning models for data analysis and predictions",
+        "Developed scalable microservices and RESTful APIs using Node.js and Express, improved system performance by 40%",
       image: "/public/work-2.png",
     },
     {
-      title: "Database Systems",
+      title: "Full Stack Developer",
       description:
-        "Creating databases for data storage and retrieval of data from web applications",
+        "Built responsive web interfaces and backend systems with React, Node.js, and MongoDB",
       image: "/public/work-3.png",
     },
     {
-      title: "Web Information Retrieval",
+      title: "Frontend Developer",
       description:
-        "Creating search engines for users to search for information by extracting data from the web",
-      image: "/images/work-4.png",
+        "Created dynamic user interfaces with React and Redux, implemented responsive designs with Tailwind CSS",
+      image: "/public/user.png",
       hidden: true,
     },
     {
-      title: "Data Analytics for Security",
+      title: "Backend Engineer",
       description:
-        "Creating data analytics models for security purposes to detect malicious activities across the web",
-      image: "/public/work-5.png",
+        "Designed and implemented RESTful APIs, serverless functions, and database systems for high-traffic applications",
+      image: "/public/background.png",
       hidden: true,
     },
   ];
@@ -193,6 +195,52 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <AnimatePresence>{isLoading && <LoadingScreen />}</AnimatePresence>
+
+      {/* Navigation */}
+      <motion.nav
+        className="bg-gray-800 py-4 px-6 sticky top-0 z-50 shadow-md"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ delay: 0.3, type: "spring", stiffness: 120 }}
+      >
+        <div className="container mx-auto flex justify-between items-center">
+          <a href="#" className="text-xl font-bold text-blue-400">
+            JV
+          </a>
+          <div className="hidden md:flex space-x-8">
+            <a
+              href="#about"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              About
+            </a>
+            <a
+              href="#projects"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              Projects
+            </a>
+            <a
+              href="#skills"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              Skills
+            </a>
+            <a
+              href="#education"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              Education
+            </a>
+            <a
+              href="#portfolio"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              Experience
+            </a>
+          </div>
+        </div>
+      </motion.nav>
 
       {/* Hero Section */}
       <motion.header
@@ -202,52 +250,160 @@ function App() {
         transition={{ delay: 0.5 }}
       >
         <div className="container mx-auto px-6 relative z-10">
-          <motion.h1
-            className="text-6xl font-bold mb-4"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.7 }}
-          >
-            Jethreshwar Varada
-          </motion.h1>
-          <motion.h2
-            className="text-2xl text-blue-400 mb-8"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.9 }}
-          >
-            Full Stack Developer
-          </motion.h2>
           <motion.div
-            className="flex space-x-4"
+            className="flex flex-col md:flex-row items-center gap-8 mb-8"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1.1 }}
+            transition={{ delay: 0.6 }}
           >
-            <a
-              href="#"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              <Github size={24} />
-            </a>
-            <a
-              href="#"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              <Linkedin size={24} />
-            </a>
-            <a
-              href="#"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              <Mail size={24} />
-            </a>
+            <img
+              src="/public/user.png"
+              alt="Jethreshwar Varada"
+              className="w-48 h-48 rounded-full border-4 border-blue-500 object-cover"
+            />
+            <div>
+              <motion.h1
+                className="text-5xl font-bold mb-2"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.7 }}
+              >
+                Jethreshwar Varada
+              </motion.h1>
+              <motion.h2
+                className="text-2xl text-blue-400 mb-4"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.9 }}
+              >
+                Senior Software Engineer
+              </motion.h2>
+              <motion.p
+                className="text-gray-300 max-w-2xl mb-6"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 1.0 }}
+              >
+                Experienced software engineer with expertise in full-stack development, cloud architecture,
+                and building scalable applications. Passionate about creating elegant solutions to complex problems
+                and delivering exceptional user experiences.
+              </motion.p>
+              <motion.div
+                className="flex space-x-6 mb-6"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 1.1 }}
+              >
+                <a
+                  href="https://github.com/Jethreswar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <Github size={22} />
+                  <span>GitHub</span>
+                </a>
+                <a
+                  href="https://linkedin.com/in/jethreshwar-varada"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <Linkedin size={22} />
+                  <span>LinkedIn</span>
+                </a>
+                <a
+                  href="mailto:jethreshwar@example.com"
+                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <Mail size={22} />
+                  <span>Email</span>
+                </a>
+              </motion.div>
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 1.2 }}
+              >
+                <a
+                  href="/public/my-cv.pdf"
+                  download
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition-colors inline-flex items-center"
+                >
+                  Download Resume
+                </a>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </motion.header>
 
+      {/* About Section */}
+      <section id="about" className="py-20 bg-gray-900">
+        <div className="container mx-auto px-6">
+          <motion.h2
+            className="text-4xl font-bold mb-12 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            About Me
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <img
+                src="/public/background.png"
+                alt="About Jethreshwar"
+                className="rounded-lg shadow-xl max-w-full h-auto"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              <h3 className="text-2xl font-bold mb-4">Software Engineer & Problem Solver</h3>
+              <p className="text-gray-300 mb-6">
+                With over 5 years of experience in software development, I specialize in building
+                scalable web applications and microservices. I'm passionate about creating innovative
+                solutions that solve real-world problems.
+              </p>
+              <p className="text-gray-300 mb-6">
+                I have a strong background in full-stack development, with expertise in React,
+                TypeScript, Node.js, and cloud technologies. I enjoy working on challenging projects
+                that push me to learn new technologies and improve my skills.
+              </p>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                  <h4 className="text-blue-400 font-medium mb-2">Location</h4>
+                  <p className="text-gray-300">Los Angeles, CA</p>
+                </div>
+                <div>
+                  <h4 className="text-blue-400 font-medium mb-2">Experience</h4>
+                  <p className="text-gray-300">5+ Years</p>
+                </div>
+                <div>
+                  <h4 className="text-blue-400 font-medium mb-2">Degree</h4>
+                  <p className="text-gray-300">M.S. Computer Science</p>
+                </div>
+                <div>
+                  <h4 className="text-blue-400 font-medium mb-2">Languages</h4>
+                  <p className="text-gray-300">English, Hindi</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Projects Section */}
-      <section className="py-20 bg-gray-800">
+      <section id="projects" className="py-20 bg-gray-800">
         <div className="container mx-auto px-6">
           <motion.h2
             className="text-4xl font-bold mb-12 text-center"
@@ -266,7 +422,7 @@ function App() {
       </section>
 
       {/* Skills Section */}
-      <section className="py-20 bg-gray-900">
+      <section id="skills" className="py-20 bg-gray-900">
         <div className="container mx-auto px-6 max-w-4xl">
           <motion.h2
             className="text-4xl font-bold mb-12 text-center"
@@ -280,6 +436,57 @@ function App() {
             {skills.map((skill, index) => (
               <SkillItem key={skill.name} skill={skill} index={index} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section id="education" className="py-20 bg-gray-800">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <motion.h2
+            className="text-4xl font-bold mb-12 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Education
+          </motion.h2>
+          <div className="space-y-8">
+            <motion.div
+              className="bg-gray-700 rounded-lg p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-xl font-bold text-white mb-1">
+                Master of Science in Computer Science
+              </h3>
+              <p className="text-blue-400 mb-3">
+                University of Southern California | 2022 - 2024
+              </p>
+              <p className="text-gray-300">GPA: 3.8/4.0</p>
+              <p className="text-gray-300 mt-2">
+                Specialized in Artificial Intelligence and Software Engineering
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="bg-gray-700 rounded-lg p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <h3 className="text-xl font-bold text-white mb-1">
+                Bachelor of Technology in Computer Science
+              </h3>
+              <p className="text-blue-400 mb-3">VIT University | 2018 - 2022</p>
+              <p className="text-gray-300">GPA: 3.7/4.0</p>
+              <p className="text-gray-300 mt-2">
+                Coursework: Data Structures, Algorithms, Database Systems, Web
+                Development
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -318,6 +525,32 @@ function App() {
           )}
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 py-12 border-t border-gray-800">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-6 md:mb-0">
+              <h2 className="text-2xl font-bold text-white">Jethreshwar Varada</h2>
+              <p className="text-gray-400 mt-2">Senior Software Engineer</p>
+            </div>
+            <div className="flex flex-col items-center md:items-end">
+              <div className="flex space-x-4 mb-4">
+                <a href="https://github.com/Jethreswar" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                  <Github size={20} />
+                </a>
+                <a href="https://linkedin.com/in/jethreshwar-varada" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                  <Linkedin size={20} />
+                </a>
+                <a href="mailto:jethreshwar@example.com" className="text-gray-400 hover:text-white">
+                  <Mail size={20} />
+                </a>
+              </div>
+              <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Jethreshwar Varada. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
