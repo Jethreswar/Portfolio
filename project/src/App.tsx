@@ -18,11 +18,11 @@ import {
   ChevronDown,
   ExternalLink,
 } from "lucide-react";
-import useMailtoFallback from "./hooks/useMailtoFallback";
+// import useMailtoFallback from "./hooks/useMailtoFallback";
 import FormspreeContactForm from "./components/FormspreeContactForm";
-import ParticlesBackground from "./components/ParticlesBackground";
+// import ParticlesBackground from "./components/ParticlesBackground";
 import AnimateOnScroll from "./components/AnimateOnScroll";
-import AnimatedText from "./components/AnimatedText";
+// import AnimatedText from "./components/AnimatedText";
 import TiltCard from "./components/TiltCard";
 
 function LoadingScreen() {
@@ -55,12 +55,10 @@ function LoadingScreen() {
 function ProjectCard({
   title,
   description,
-  image,
   delay,
 }: {
   title: string;
   description: string;
-  image: string;
   delay: number;
 }) {
   return (
@@ -78,13 +76,9 @@ function ProjectCard({
         transition={{ delay, duration: 0.5 }}
       >
         <div className="relative overflow-hidden group">
-          <motion.img
-            src={image}
-            alt={title}
-            className="w-full h-52 object-cover transition-all duration-700 ease-in-out group-hover:scale-110"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 1.5 }}
-          />
+          <div className="bg-blue-500/20 h-16 flex items-center justify-center">
+            <div className="h-1 w-36 bg-blue-500/40 rounded-full mb-2"></div>
+          </div>
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-80"></div>
           <motion.div
             className="absolute bottom-0 left-0 p-4 w-full"
@@ -205,12 +199,10 @@ function SkillCategoryCard({
                 }}
               >
                 <div className="w-8 h-8 mb-2 flex items-center justify-center">
-                  <motion.img
+                  <img
                     src={skill.icon}
                     alt={`${skill.name} icon`}
                     className="max-w-full max-h-full object-contain"
-                    whileHover={{ rotate: 10, scale: 1.15 }}
-                    transition={{ type: "spring", stiffness: 300 }}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.onerror = null;
@@ -264,16 +256,16 @@ function BackgroundPattern() {
 interface CertificationProps {
   title: string;
   issuer: string;
-  icon: string;
   bgColor: string;
+  icon?: string;
   delay?: number;
 }
 
 function CertificationCard({
   title,
   issuer,
-  icon,
   bgColor,
+  icon,
   delay = 0,
 }: CertificationProps) {
   const [isHovered, setIsHovered] = useState(false);
@@ -303,37 +295,20 @@ function CertificationCard({
             }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
-            <img
-              src={icon}
-              alt={`${title} Logo`}
-              className="max-w-full max-h-full object-contain"
-              style={{
-                filter: title.includes("Oracle")
-                  ? "brightness(0) invert(1)"
-                  : "none",
-              }}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.onerror = null;
-
-                // Specific fallbacks based on the certification
-                if (title.includes("AWS")) {
-                  target.src =
-                    "https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png";
-                } else if (title.includes("Oracle")) {
-                  target.src =
-                    "https://www.oracle.com/a/ocom/img/oracle-logo.svg";
-                  target.style.filter = "brightness(0) invert(1)"; // Ensure logo is white
-                } else if (title.includes("LangChain")) {
-                  target.src =
-                    "https://avatars.githubusercontent.com/u/126733545?s=200&v=4";
-                } else {
-                  target.src = `https://ui-avatars.com/api/?name=${
-                    title.split(" ")[0]
-                  }&background=4865C5&color=fff&size=128`;
-                }
-              }}
-            />
+            {icon ? (
+              <img
+                src={icon}
+                alt={`${issuer} icon`}
+                className="w-12 h-12 object-contain"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = `https://ui-avatars.com/api/?name=${issuer}&background=3B82F6&color=fff&size=128`;
+                }}
+              />
+            ) : (
+              <div className="w-10 h-10 bg-blue-500/40 rounded-md"></div>
+            )}
           </motion.div>
           <motion.h3
             className="text-lg font-bold text-white"
@@ -401,52 +376,34 @@ function App() {
 
   const certifications = [
     {
-      title: "AWS Cloud Essentials",
-      issuer: "Amazon Web Services",
-      icon: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
-      bgColor: "bg-gradient-to-br from-orange-500/20 to-yellow-500/20",
-    },
-    {
-      title: "OCI Foundations Associate",
-      issuer: "Oracle Cloud Infrastructure",
-      icon: "https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg",
-      bgColor: "bg-gradient-to-br from-red-500/20 to-red-800/20",
-    },
-    {
-      title: "Oracle Integration Cloud",
-      issuer: "Professional Certification",
-      icon: "https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg",
+      title: "Oracle Cloud Infrastructure Foundations Associate 2022",
+      issuer: "Oracle",
       bgColor: "bg-gradient-to-br from-blue-500/20 to-purple-500/20",
+      icon: "https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg",
     },
     {
-      title: "LangChain Academy",
-      issuer: "LangChain Technologies",
-      icon: "https://avatars.githubusercontent.com/u/126733545?s=200&v=4",
-      bgColor: "bg-gradient-to-br from-green-500/20 to-teal-500/20",
+      title: "Oracle Integration Cloud Professional 2022",
+      issuer: "Oracle",
+      bgColor: "bg-gradient-to-br from-blue-500/20 to-purple-500/20",
+      icon: "https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg",
     },
   ];
 
   const projects = [
     {
-      title: "Workout Management Bot",
+      title: "Transaction Processing Platform",
       description:
-        "MongoDB, Express.js, React.js, Node.js | Overhauled CRUD operations for workout records using Mongoose ORM, reducing database response times by 25%",
-      image:
-        "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        "Spring Boot, Kotlin, WebFlux, ReactJS, Kafka | Architected microservices for transaction processing and account management with async APIs, improving throughput and reducing latency.",
     },
     {
-      title: "Student Enrollment System",
+      title: "Fraud Analytics System",
       description:
-        "Spring Boot & JPA, Oracle JDBC, React.js | Deployed Spring Boot and Spring Data JPA, reducing database access time by 31.4% and boosting API performance by 26.7%",
-      image:
-        "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        "Spring Boot, Angular, PostgreSQL, Cassandra, Apache Camel | Built real-time fraud analytics platform processing 25K transactions/sec with less than 200ms response time, reducing detection latency from minutes to seconds.",
     },
     {
-      title: "Quiz LMS Generator",
+      title: "E-commerce Order Management",
       description:
-        "Django, PostgreSQL, HTML, CSS | Generated a Django-based quiz management system with secure authentication, improving security and usability by 34.7%",
-      image:
-        "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        "Spring MVC, Spring Batch, Oracle PL/SQL, ReactJS, Kafka | Developed services to handle order lifecycle processes, optimizing queries and batch processing, reducing order processing delays by 25%.",
     },
   ];
 
@@ -455,126 +412,168 @@ function App() {
       category: "Programming Languages",
       skills: [
         {
-          name: "Python",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-        },
-        {
           name: "Java",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
         },
         {
-          name: "JavaScript",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+          name: "Kotlin",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
+        },
+        {
+          name: "Python",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
         },
         {
           name: "C",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
         },
         {
-          name: "C++",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
+          name: "JavaScript",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+        },
+        {
+          name: "TypeScript",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
         },
         {
           name: "SQL",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
         },
         {
-          name: "PL/SQL",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg",
-        },
-        {
-          name: "HTML",
+          name: "HTML5",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
         },
         {
-          name: "CSS",
+          name: "CSS3",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
         },
-        { name: "XML", icon: "https://www.svgrepo.com/show/31053/xml.svg" },
       ],
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
       color: "bg-blue-500/20",
     },
     {
-      category: "Frameworks & Libraries",
+      category: "Java Technologies",
       skills: [
         {
-          name: "React",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-        },
-        {
-          name: "Spring",
+          name: "Spring Boot",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
         },
         {
-          name: "Django",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
+          name: "Spring MVC",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
         },
         {
-          name: "Flask",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg",
-        },
-        {
-          name: "Node.js",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-        },
-        {
-          name: "Express",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+          name: "Spring Security",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
         },
         {
           name: "Hibernate",
-          icon: "https://hibernate.org/images/hibernate-logo.svg",
+          icon: "https://www.vectorlogo.zone/logos/hibernate/hibernate-icon.svg",
         },
         {
-          name: "J2EE",
-          icon: "https://www.vectorlogo.zone/logos/java/java-icon.svg",
+          name: "JDBC",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+        },
+        {
+          name: "Servlets",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+        },
+        {
+          name: "JSP",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+        },
+        {
+          name: "JAX-RS",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+        },
+        {
+          name: "Struts",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg",
         },
       ],
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+      color: "bg-green-500/20",
+    },
+    {
+      category: "Web Technologies",
+      skills: [
+        {
+          name: "ReactJS",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+        },
+        {
+          name: "Redux",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
+        },
+        {
+          name: "Angular",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
+        },
+        {
+          name: "Vue.js",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
+        },
+        {
+          name: "NodeJS",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+        },
+        {
+          name: "jQuery",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg",
+        },
+        {
+          name: "Bootstrap",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+        },
+        {
+          name: "AJAX",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+        },
+      ],
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
       color: "bg-purple-500/20",
     },
     {
-      category: "Database & Cloud",
+      category: "Databases",
       skills: [
         {
           name: "Oracle",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg",
+          icon: "https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg",
         },
         {
           name: "PostgreSQL",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
         },
         {
+          name: "MySQL",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+        },
+        {
+          name: "SQL Server",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg",
+        },
+        {
           name: "MongoDB",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
         },
         {
+          name: "Cassandra",
+          icon: "https://www.vectorlogo.zone/logos/apache_cassandra/apache_cassandra-icon.svg",
+        },
+      ],
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+      color: "bg-red-500/20",
+    },
+    {
+      category: "Cloud & DevOps",
+      skills: [
+        {
           name: "AWS",
-          icon: "https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_179x109.png",
+          icon: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
         },
         {
           name: "Azure",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
-        },
-        {
-          name: "Oracle Cloud",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg",
-        },
-      ],
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg",
-      color: "bg-yellow-500/20",
-    },
-    {
-      category: "Tools & Software",
-      skills: [
-        {
-          name: "Git",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-        },
-        {
-          name: "GitHub",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
         },
         {
           name: "Docker",
@@ -589,20 +588,55 @@ function App() {
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg",
         },
         {
-          name: "VS Code",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+          name: "Git",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
         },
         {
-          name: "Postman",
-          icon: "https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg",
+          name: "Maven",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg",
         },
         {
-          name: "SOAP UI",
-          icon: "https://static1.smartbear.co/smartbearbrand/media/images/home/soapui-icon.svg",
+          name: "Gradle",
+          icon: "https://www.vectorlogo.zone/logos/gradle/gradle-icon.svg",
         },
       ],
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-      color: "bg-green-500/20",
+      icon: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
+      color: "bg-yellow-500/20",
+    },
+    {
+      category: "Messaging & Monitoring",
+      skills: [
+        {
+          name: "Kafka",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg",
+        },
+        {
+          name: "AWS SQS",
+          icon: "https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png",
+        },
+        {
+          name: "Apache Camel",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg",
+        },
+        {
+          name: "Splunk",
+          icon: "https://www.vectorlogo.zone/logos/splunk/splunk-icon.svg",
+        },
+        {
+          name: "Dynatrace",
+          icon: "https://www.vectorlogo.zone/logos/dynatrace/dynatrace-icon.svg",
+        },
+        {
+          name: "SonarQube",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sonarqube/sonarqube-original.svg",
+        },
+        {
+          name: "Log4j",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg",
+        },
+      ],
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg",
+      color: "bg-orange-500/20",
     },
   ];
 
@@ -660,14 +694,19 @@ function App() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.9 }}
           >
-            Software Engineer | AI Enthusiast | Information Systems Graduate
+            Sr. Full Stack Developer | Java/J2EE Expert | Cloud & Microservices
+            Specialist
           </motion.h2>
           <motion.p
             className="text-xl mb-6 text-gray-300"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.0 }}
-          ></motion.p>
+          >
+            Sr. Full Stack Developer with 8+ years of experience in Java/J2EE,
+            Spring Boot, Microservices, and Cloud technologies across Banking,
+            Financial, Retail, and Telecom domains.
+          </motion.p>
           <motion.div
             className="flex space-x-4"
             initial={{ y: 20, opacity: 0 }}
@@ -682,14 +721,14 @@ function App() {
               <Github size={24} />
             </a>
             <a
-              href="https://www.linkedin.com/in/jethreswar-varada-740b8a1a0/"
+              href="https://www.linkedin.com/in/jethreswar-varada-878281370/"
               className="text-gray-400 hover:text-white transition-colors"
               title="LinkedIn"
             >
               <Linkedin size={24} />
             </a>
             <a
-              href="mailto:jethreswarvarada@gmail.com"
+              href="mailto:varadajet98@gmail.com"
               className="text-gray-400 hover:text-white transition-colors"
               title="Email"
             >
@@ -709,7 +748,7 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            My Projects
+            Key Projects
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
@@ -739,9 +778,10 @@ function App() {
             viewport={{ once: true }}
           >
             <p className="text-gray-300 max-w-2xl mx-auto">
-              Specialized in full-stack development with expertise in various
-              programming languages, frameworks, cloud technologies, and
-              development tools
+              Expert in full-stack development with Java/J2EE, Spring Boot,
+              Microservices, Hibernate, and RESTful/SOAP Web Services.
+              Proficient in front-end technologies, event-driven architectures,
+              database optimization, and cloud platforms.
             </p>
           </motion.div>
 
@@ -778,19 +818,40 @@ function App() {
             >
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-white">
-                    DXC Technology
-                  </h3>
-                  <p className="text-blue-400">
-                    Associate Professional Software Engineer
-                  </p>
+                  <h3 className="text-xl font-bold text-white">EchoStar</h3>
+                  <p className="text-blue-400">Sr. Full Stack Developer</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-gray-400">2 Years 6 months</p>
-                  <p className="text-gray-400">Bangalore, India</p>
+                  <p className="text-gray-400">November 2023 – Present</p>
+                  <p className="text-gray-400">Englewood, CO, USA</p>
                 </div>
               </div>
-              <ul className="list-disc pl-5 text-gray-400 space-y-2"></ul>
+              <ul className="list-disc pl-5 text-gray-400 space-y-2">
+                <li>
+                  Architected and developed Spring Boot microservices for
+                  transaction processing and account management, ensuring
+                  modular design, code reusability, and adherence to enterprise
+                  security standards.
+                </li>
+                <li>
+                  Refactored legacy Java services into Kotlin with Spring
+                  WebFlux, introducing asynchronous, non-blocking APIs that
+                  improved transaction throughput and reduced latency under
+                  heavy load.
+                </li>
+                <li>
+                  Designed and implemented ReactJS front-end applications with
+                  reusable hooks and modular components, delivering intuitive
+                  user interfaces for transaction workflows and account
+                  services.
+                </li>
+                <li>
+                  Implemented event-driven architecture using Kafka, creating
+                  and managing topics, partitions, and consumer groups for
+                  fault-tolerant, real-time communication between distributed
+                  microservices.
+                </li>
+              </ul>
             </motion.div>
 
             <motion.div
@@ -803,16 +864,122 @@ function App() {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <h3 className="text-xl font-bold text-white">
-                    Smart Cookie Rewards Pvt. Ltd
+                    First Citizens Bank
                   </h3>
-                  <p className="text-blue-400">Data Scientist Intern</p>
+                  <p className="text-blue-400">Full Stack Developer</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-gray-400">4 months</p>
-                  <p className="text-gray-400">New Jersey, USA</p>
+                  <p className="text-gray-400">July 2021 – October 2023</p>
+                  <p className="text-gray-400">Los Angeles, CA, USA</p>
                 </div>
               </div>
-              <ul className="list-disc pl-5 text-gray-400 space-y-2"></ul>
+              <ul className="list-disc pl-5 text-gray-400 space-y-2">
+                <li>
+                  Built and deployed Spring Boot microservices to process
+                  high-volume banking transactions (handling ~25K transactions
+                  per second) with less than 200ms average response time.
+                </li>
+                <li>
+                  Developed Angular dashboards with RxJS to deliver fraud alerts
+                  and KPIs in near real time, reducing analyst response times by
+                  35%.
+                </li>
+                <li>
+                  Implemented Apache Camel routes to integrate with core banking
+                  systems and external fraud scoring providers, improving
+                  interoperability and reducing integration errors by 20%.
+                </li>
+                <li>
+                  Architected PostgreSQL and Cassandra hybrid data storage,
+                  enabling transactional consistency while scaling analytics to
+                  billions of records with 99.99% availability.
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              className="bg-gray-900 rounded-lg p-6 shadow-lg"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-xl font-bold text-white">Office Depot</h3>
+                  <p className="text-blue-400">Software Developer</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-gray-400">September 2019 – June 2021</p>
+                  <p className="text-gray-400">Boca Raton, FL, USA</p>
+                </div>
+              </div>
+              <ul className="list-disc pl-5 text-gray-400 space-y-2">
+                <li>
+                  Developed Spring MVC services and Spring Batch jobs to handle
+                  order lifecycle processes (checkout, invoicing, returns,
+                  shipping) and improved order throughput during peak sale
+                  periods.
+                </li>
+                <li>
+                  Optimized Hibernate and Oracle PL/SQL layers: tuned queries,
+                  indexes, and batch processing to reduce order processing
+                  delays by 25%.
+                </li>
+                <li>
+                  Built ReactJS components with a Flux and similar architecture
+                  for dynamic customer order views and internal dashboards,
+                  enhancing user feedback by reducing response times.
+                </li>
+                <li>
+                  Integrated Apache Kafka for event-driven interactions among
+                  inventory, payment, and shipping services to ensure consistent
+                  state across systems and reduce stale data issues.
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              className="bg-gray-900 rounded-lg p-6 shadow-lg"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-xl font-bold text-white">
+                    Evoke Technologies
+                  </h3>
+                  <p className="text-blue-400">Java Developer</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-gray-400">June 2017 – August 2019</p>
+                  <p className="text-gray-400">Hyderabad, India</p>
+                </div>
+              </div>
+              <ul className="list-disc pl-5 text-gray-400 space-y-2">
+                <li>
+                  Designed and developed interactive JSP forms with client-side
+                  validation, ensuring accurate data capture and improved user
+                  experience.
+                </li>
+                <li>
+                  Built responsive presentation layers using HTML5, CSS3,
+                  JavaScript, and Bootstrap, enhancing usability across multiple
+                  browsers and devices.
+                </li>
+                <li>
+                  Implemented business logic modules in Java with Spring Core
+                  and MVC frameworks, using Bean wiring, Dispatcher Servlets,
+                  Controllers, and View Resolvers.
+                </li>
+                <li>
+                  Developed and consumed RESTful and SOAP-based web services,
+                  deployed on WebLogic, with schema validation for SOAP requests
+                  and JSON/XML handling for REST.
+                </li>
+              </ul>
             </motion.div>
           </div>
         </div>
@@ -843,16 +1010,15 @@ function App() {
                     Binghamton University, State University of New York
                   </h3>
                   <p className="text-blue-400">
-                    Thomas J. Watson College of Engineering and Applied Science
+                    Master's in Information Systems
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-gray-400">Graduated May 2025</p>
-                  <p className="text-blue-400">GPA: 3.58/4.00</p>
+                  <p className="text-gray-400">Binghamton, NY, USA</p>
                 </div>
               </div>
               <p className="text-white font-medium">
-                Master of Science in Information Systems
+                Thomas J. Watson College of Engineering and Applied Science
               </p>
               <p className="text-gray-400 mt-2">
                 Relevant Coursework: Python & Data Mining, Database Systems, Web
@@ -872,18 +1038,16 @@ function App() {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <h3 className="text-xl font-bold text-white">
-                    GITAM University, Visakhapatnam, India
+                    GITAM University
                   </h3>
+                  <p className="text-blue-400">
+                    Bachelor's in Electronics and Communication Engineering
+                  </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-gray-400">June 2016 – July 2020</p>
-                  <p className="text-blue-400">GPA: 3.45/4.00</p>
+                  <p className="text-gray-400">Visakhapatnam, AP, India</p>
                 </div>
               </div>
-              <p className="text-white font-medium">
-                Bachelor of Technology in Electronics and Communication
-                Engineering
-              </p>
               <p className="text-gray-400 mt-2">
                 Relevant Coursework: Programming with C, Object Oriented
                 Programming with C++, Introduction to Database Management
@@ -914,19 +1078,19 @@ function App() {
             viewport={{ once: true }}
           >
             <p className="text-gray-300 max-w-2xl mx-auto">
-              Professional certifications in cloud technologies, database
-              systems, and AI development
+              Professional Oracle cloud certifications demonstrating expertise
+              in cloud infrastructure and integration services
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {certifications.map((cert, index) => (
               <CertificationCard
                 key={cert.title}
                 title={cert.title}
                 issuer={cert.issuer}
-                icon={cert.icon}
                 bgColor={cert.bgColor}
+                icon={cert.icon}
                 delay={index * 0.1}
               />
             ))}
@@ -970,10 +1134,10 @@ function App() {
                         Email
                       </h4>
                       <a
-                        href="mailto:jethreswarvarada@gmail.com"
+                        href="mailto:varadajet98@gmail.com"
                         className="text-white hover:text-blue-400 transition-colors break-all text-sm md:text-base"
                       >
-                        jethreswarvarada@gmail.com
+                        varadajet98@gmail.com
                       </a>
                     </div>
                   </div>
@@ -987,7 +1151,7 @@ function App() {
                         Phone
                       </h4>
                       <p className="text-white text-sm md:text-base">
-                        +1 (607) 595 8513
+                        +1 (607) 323-1064
                       </p>
                     </div>
                   </div>
@@ -1021,7 +1185,7 @@ function App() {
                       <Github size={20} />
                     </a>
                     <a
-                      href="https://www.linkedin.com/in/jethreswar-varada-740b8a1a0/"
+                      href="https://www.linkedin.com/in/jethreswar-varada-878281370/"
                       className="bg-gray-700 hover:bg-blue-600 transition-colors p-2 rounded-lg"
                       target="_blank"
                       rel="noopener noreferrer"
